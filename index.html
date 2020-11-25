@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+	background-image: url("mars.gif");
+    background-position: center;
+    background-size: cover;
+}
+#myCanvas
+{
+	border-width:10px;
+	background-color: white; 
+	border-style:ridge;
+}
+
+h1,h4
+{
+	color: white !important;
+}
+</style>		
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<title>Moving Rover On</title>
+</head>
+<body onload="add()">
+<center>
+<h1>Moving Rover On Mars</h1>
+<h4>
+	<b class="text-danger">NOTE : </b> IF ROVER IS NOT VISIBLE PRESS ANY ARROW KEY
+</h4>
+<canvas id="myCanvas" height="600" width="800"></canvas>
+</center>
+</body>
+</html>
+<script>
+    canvas=document.getElementById("myCanvas");
+    ctx= canvas.getContext("2d");
+
+    width=100;
+    height=90;
+    background_image="mars.jpg";
+    rover_image="rover.png";
+    x=10;
+    y=10;
+
+    function add(){
+        background_img_tg=  new Image();
+        background_img_tg.onload=uploadBackground;
+        background_img_tg.src=background_image;
+
+        rover_img_tg=  new Image();
+        rover_img_tg.onload=uploadrover;
+        rover_img_tg.src=rover_image;
+    }
+    function uploadBackground(){
+        ctx.drawImage(background_img_tg,0,0,canvas.width,canvas.height);
+    }
+    function uploadrover(){
+        ctx.drawImage(rover_img_tg,x,y,width,height);
+    }
+    window.addEventListener("keydown",myKeydown);
+
+    function myKeydown(e) {
+        keyPressed=e.keyCode;
+        console.log(keyPressed);
+        if(keyPressed=='38'){
+            up();
+        }
+        if(keyPressed=='40'){
+            down();
+        }
+        if(keyPressed=='37'){
+            left();
+        }
+        if(keyPressed=='39'){
+            right();
+        }
+    }
+
+    function up()
+{
+	if(y >=0)
+	{
+		y = y - 10;
+		 uploadBackground();
+		 uploadrover();
+	}
+}
+function down()
+{
+	if(y <=500)
+	{
+		y =y+ 10;
+		uploadBackground();
+		 uploadrover();
+	}
+}
+function left()
+{
+	if(x >= 0)
+	{
+		x =x - 10;
+		uploadBackground();
+		 uploadrover();
+	}
+}
+function right()
+{
+	if(x <= 700)
+	{
+		x =x + 10;
+		uploadBackground();
+		uploadrover();
+   }
+}
+
+</script>
